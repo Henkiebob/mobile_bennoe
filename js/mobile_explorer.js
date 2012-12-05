@@ -9,8 +9,8 @@ jQuery(function() {
 
 
 	var data = {};
-	var categoryArray = [1,2,3,4,5,6,7,8,9,10];
-	var statesArray = [];
+	var categoryArray = [3];
+	var statesArray = ['Groningen'];
 	var rangeLow  = [];
 	var rangeHigh = [];
 	
@@ -19,11 +19,34 @@ jQuery(function() {
 			'rangeLow': rangeLow,
 			'rangeHigh': rangeHigh			
 	};
+
+	$.getJSON(rootDomain + 'explore.js?callback=?&variable=penis', { 
+		toSearch: {
+					province: statesArray, 
+					searchQuery: "Anus" 
+				} 
+		}, function(data) {
+			//Huzzah!
+			if (data) {
+				//If data is returned, loop through it and create a listitem with the title of a trip.
+				//An onclick will be fired if javascript is enabled, otherwise the user will be redirected to the page.
+				for (var i in data) {
+					if (data[i].title) {
+						var listItem = '<li>\
+							<a href="' + rootDomain + 'trips/' + data[i].id + '" onClick="getSingleItem(' + data[i].id + '); return false;">\
+								' + data[i].title + '\
+							</a>\
+						</li>';
+						jQuery("#list").append(listItem);
+					}
+				}
+			}
+	    });
 	
 
-	jQuery.ajax ({
+	/*jQuery.ajax ({
 			url: rootDomain + 'explore.js?callback=?&variable=penis',
-			type: 'JSON',
+			type: 'JSONP',
 			//data: {'toSearch' : data },
 			//crossDomain: true,
 			success: function (response) {
