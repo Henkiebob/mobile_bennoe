@@ -1,0 +1,67 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.overflowContainer {
+	overflow: hidden;
+}
+
+	.overflowContainer .listItems, .overflowContainer .singleView, .overflowContainer .listItems ul, .overflowContainer .listItems ul li {
+		width: 100%;
+		float: left;
+	}
+
+		.overflowContainer .listItems ul li {
+			background: pink;
+			border-bottom: 1px solid #000;
+			font-size: 1.7em;
+			font-family: Tahoma;
+			font-weight: bold;
+			line-height: 45px;
+			list-style-type: none;
+		}
+
+			.overflowContainer .listItems ul li a {
+				margin: 0 0 0 10px;
+				color: #000;
+				display: block;
+				width: 95%;
+				
+			}
+
+	.overflowContainer .slideBlock {
+		position: relative;
+		top: 0px;
+		left: 0px;
+	}
+
+	
+	.overflowContainer .slideBlock .singleView .singleContainer {
+		padding: 40px;
+		box-sizing: content-box;
+		display: none;
+		margin: 0 auto;
+		width: 80% !important;
+		float: left;
+	}
+
+		.overflowContainer .slideBlock .singleView .singleContainer h1 {
+			width: 100%;
+		}
+
+		.overflowContainer .slideBlock .singleView .singleContainer #map_canvas {
+			margin: 0 auto;
+			border: 3px solid #000;
+		}
+
+
+#currentStep {
+	display: hidden;
+}
