@@ -119,7 +119,7 @@ jQuery(function() {
 });
 function getSingleItem(id) {
 	clearPath();
-	jQuery.getJSON(rootDomain + 'explore/'+ id + '.js?variable=tripsJSON&callback=?', function(data) {
+	jQuery.getJSON(rootDomain + 'trips/'+ id + '.js?variable=tripsJSON&callback=?', function(data) {
 		if (data) {
 			
 			//Slidestep function slides to the given blocknumber(Counts from left to right)
