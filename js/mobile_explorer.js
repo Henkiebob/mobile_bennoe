@@ -20,10 +20,10 @@ jQuery(function() {
 			'rangeHigh': rangeHigh			
 	};
 
-	$.getJSON(rootDomain + 'explore.js?callback=?&variable=penis', { 
+	$.getJSON(rootDomain + 'explore.js?callback=?&variable=toSearch', { 
 		toSearch: {
 					province: statesArray, 
-					searchQuery: "Anus" 
+					searchQuery: "Pieterpad" 
 				} 
 		}, function(data) {
 			//Huzzah!
