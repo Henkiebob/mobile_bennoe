@@ -9,8 +9,8 @@ jQuery(function() {
 
 
 	var data = {};
-	var categoryArray = [3];
-	var statesArray = ['Groningen'];
+	var categoryArray = [4, 5];
+	var statesArray = ['Friesland'];
 	var rangeLow  = [];
 	var rangeHigh = [];
 	
@@ -22,8 +22,7 @@ jQuery(function() {
 
 	$.getJSON(rootDomain + 'explore.js?callback=?&variable=toSearch', { 
 		toSearch: {
-					province: statesArray, 
-					searchQuery: "Pieterpad" 
+					province: statesArray
 				} 
 		}, function(data) {
 			//Huzzah!

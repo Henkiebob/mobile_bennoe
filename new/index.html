@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="nl"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="nl"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="nl"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="nl"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Bennoe</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+  	<link rel="stylesheet" href="stylesheets/jquery-mobile.css" />
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/style.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+	<!-- Javascript
+	================================================== -->
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA1XdOyTrhnTo0ys0MWXVs3YXisqiC6Vyk&sensor=false"></script>
+	<script src="js/map/mapFunctions.js"</script>
+	<script src="js/map/viewMap.js"></script>
+	
+	<script src="js/mobile_explorer.js"></script>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+	<div class="container">
+
+		<div data-role="page" id="home">
+			<div class="nav_bar">
+				<h1 class="nav_bar_title">Home</h1>
+			</div>	<!-- nav_bar !-->
+
+			<div data-role="content" id="home">	
+				<div class="home_button_layout">
+
+					<a href="#profile" data-transition="slide" class="button">
+						<img src="images/profile_button.png">
+						<span class="button_text">Profiel</span>
+					</a>
+
+					<a href="#near" data-transition="slide" class="button" onClick="getAllItemsInProvince();">
+						<img src="images/near_button.png">
+						<span class="button_text">In de buurt</span>
+					</a>
+					
+					<a href="#favorites" data-transition="slide" class="button">
+						<img src="images/favorites_button.png">
+						<span class="button_text">Favorieten</span>
+					</a>
+
+					<a href="#search" data-transition="slide" class="button">
+						<img src="images/search_button.png">
+						<span class="button_text">Zoeken</span>
+					</a>
+
+					<a href="#bennoe" data-transition="slide" class="button">
+						<img src="images/bennoe.png">
+						<span class="button_text">Over Bennoe</span>
+					</a>
+
+
+				</div><!-- home_button_layout -->
+			</div><!-- /content -->
+		</div>
+
+
+		<div data-role="page" id="profile">
+			<div class="nav_bar">
+				<a class="home_button" href="#home" data-transition="slide"></a> 
+				<h1 class="nav_bar_title">Profile</h1>
+			</div>	<!-- nav_bar !-->
+
+			<div data-role="content">	
+				
+				<div class="login_form">
+					<h2 class="login_title">Inloggen</h2>
+					<div class="form_container">
+						<form>
+							<input type="text" placeholder="e-mailadres" name="email">
+							<input type="password" placeholder="wachtwoord" name="password">
+							<input type="submit" value="Inloggen" data-role="none" class="login_btn green_button">
+						</form>
+
+						<a class="facebook_button" data-role="none">Login met Facebook</a>	
+					</div>
+				</div>
+			
+				<div class="login_form register">
+					<div class="form_container">
+						<h2 class="login_title">Registeren</h2>
+						<form>
+							<input type="text" placeholder="e-mailadres" name="email">
+							<input type="password" placeholder="wachtwoord" name="password">
+							<input type="password" placeholder="wachtwoord nog een keer" name="password_confirmation">
+							<input type="submit" value="Registreren" data-role="none" class="reg_btn green_button">
+						</form>
+					</div>
+				</div>
+
+			</div><!-- /content -->
+		</div>
+
+		<div data-role="page" id="near">
+			<div class="nav_bar">
+				<a class="home_button" href="#home" data-transition="slide"></a> 
+				<h1 class="nav_bar_title">In de buurt</h1>
+			</div>	<!-- nav_bar !-->
+			<a class="location_box" href="#" data-role="none">Huidige locatie: Groningen(wijzig)</a>
+			<div data-role="content">
+				<h2 class="breadcrumb">Routes in de buurt</h2>
+
+			
+				<section class="routes" id="near_routes_list">
+					
+				</section><!--routes !-->
+
+			</div><!-- /content -->
+		</div>
+
+	<div data-role="page" id="favorites">
+			<div class="nav_bar">
+				<a class="home_button" href="#home" data-transition="slide"></a> 
+				<h1 class="nav_bar_title">Favorieten</h1>
+			</div>	<!-- nav_bar !-->
+
+			<div data-role="content">
+				<h2 class="breadcrumb">Uw favorieten</h2>
+
+				<section class="routes">
+
+					<a class="route" href="#">
+						<span class="thumb">
+							<img src="images/thumb.jpg">
+						</span>
+						<span class="route_title">
+							Het Pieterpad
+						</span>
+						<span class="route_extra">
+							4 km vanaf huidig punt<br/>
+							urban, stad, nieuw
+						</span>
+					</a>
+				</section><!--routes !-->
+
+			</div><!-- /content -->
+		</div>
+
+		<div data-role="page" id="search">
+			<div class="nav_bar">
+				<a class="home_button" href="#home" data-transition="slide"></a> 
+				<h1 class="nav_bar_title">Zoeken</h1>
+			</div>	<!-- nav_bar !-->
+
+			<div data-role="content">	
+
+				<section class="filter">
+					<form>
+						<label for="states" class="select">Provincie:</label>
+						<select name="states" id="states">
+							<option name="state" value="">Selecteer een provincie</option>
+							<option name="state" value="Brabant">Brabant</option>
+							<option name="state" value="Drenthe">Drenthe</option>
+							<option name="state" value="Flevoland">Flevoland</option>
+							<option name="state" value="Friesland">Friesland</option>
+							<option name="state" value="Gelderland">Gelderland</option>
+							<option name="state" value="Groningen">Groningen</option>
+							<option name="state" value="Limburg">Limburg</option>
+							<option name="state" value="Noord-Holland">Noord-Holland</option>
+							<option name="state" value="Overijssel">Overijssel</option>
+							<option name="state" value="Utrecht">Utrecht</option>
+							<option name="state" value="Zeeland">Zeeland</option>
+							<option name="state" value="Zuid-Holland">Zuid-Holland</option>
+						</select>
+						<br/>
+						<!--<input type="search" name="search-mini" placeholder="Zoek op naam" id="search-mini" value="" data-mini="true" />!-->
+					
+						<label for="slider-fill">Wandel afstand in KM</label>
+						<input type="range" name="slider-fill" id="slider-fill" value="10" min="0" max="150" data-highlight="true" />
+						<br/>
+						<label for="fieldset">Categorieen:</label>
+						<fieldset data-role="controlgroup">
+							<label><input type="checkbox" name="checkbox-0" /> Urban </label>
+							<label><input type="checkbox" name="checkbox-0" /> Bos </label>
+							<label><input type="checkbox" name="checkbox-0" /> Strand </label>
+							<label><input type="checkbox" name="checkbox-0" /> Beginner </label>
+						</fieldset>
+						<input type="submit" name="submitsearch" value="Zoeken">
+
+					</form>
+				</section>
+
+			</div><!-- /content -->
+		</div>
+
+		<div data-role="page" id="bennoe">
+			<div class="nav_bar">
+				<a class="home_button" href="#home" data-transition="slide"></a> 
+				<h1 class="nav_bar_title">Over ons</h1>
+			</div>	<!-- nav_bar !-->
+
+			<div data-role="content">	
+				<section class="about">
+					<h2>Over Bennoe</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non augue odio, a luctus nulla. Etiam ac felis volutpat sem ullamcorper mollis. Mauris id luctus enim. Sed tincidunt nibh et purus tincidunt ac auctor nulla eleifend. Vivamus tortor neque, gravida ac congue ac, rutrum nec ante. In ut tellus eros. Cras tristique sem vitae leo elementum ornare. Nunc ac dui sed est varius tincidunt eu ut nulla.</p>
+				</section>
+
+			</div><!-- /content -->
+		</div>
+
+	</div><!-- container -->
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
