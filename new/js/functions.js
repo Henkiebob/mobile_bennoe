@@ -1,3 +1,104 @@
+// maakt globals klaar
+var data = {};
+var categoryArray = [];
+var statesArray = [];
+var rangeLow  = [];
+var rangeHigh = [];
+var searchQuery = "";
+
+jQuery(document).ready(function() {
+
+			$("#submitSearch").click(function() {
+  				searchCheck();
+				categoryCheck();
+				stateCheck();
+				//updateTotalRange();
+
+				collectAll();
+
+				return false;
+			});		
+});
+
+
+function searchCheck(){
+	searchQuery = "";
+	searchQuery = $('#search').val();	
+}
+
+function categoryCheck(){
+	categoryArray = [];
+	$('input[type="checkbox"]:checked').each(function() {
+		categoryArray.push(this.value);	
+	});	
+}
+
+function stateCheck(){
+	statesArray = [];	
+	var state = $('#states').val();
+
+	if(state != ""){
+		statesArray.push(state);
+	}
+}
+
+// function updateTotalRange(range_low, range_high){
+// 	rangeLow  = [];
+// 	rangeHigh = [];
+
+// 	rangeLow.push(range_low);
+// 	rangeHigh.push(range_high);
+// }
+
+function collectAll() {
+	data = {'categories': categoryArray,
+			'province': statesArray,
+			'rangeLow': rangeLow,
+			'rangeHigh': rangeHigh,
+			'searchQuery' : searchQuery
+	};
+
+	sendData(data);
+}
+
+// send the data 
+	function sendData(data){
+		var content = '';
+		$.getJSON(rootDomain + '/explore.js?callback=?&variable=toSearch', { 
+			toSearch: data 
+			}, function(data) {
+				if(data.length == 0){
+					content = '<h1>Helaas, niks gevonden</h1>';	
+				} else{
+					$.each(data, function (index, trip) {
+					    // Use item in here
+						content += '<a class="tripPreview" href="'+rootDomain+'/trips/'+trip.id+'">';
+						content += '<span class="tripTitle">'+trip.title+ '</span>';
+						
+						if(trip.description != null ){
+							content += '<div class="tripOverlay">'+trip.description+ '</div>';
+					    }
+						
+						var pic_count = 0;
+					    $.each(trip.tripphotos,function(index2,tripphoto){
+					   
+					   		if(pic_count == 0){
+						   		if(tripphoto.filename.thumb.url.length != null){
+							   	 content += '<img src="'+rootDomain+tripphoto.filename.thumb.url+'">';
+						  	 	}
+					   		}
+
+					   		pic_count ++
+
+					    });
+							
+						content += '</a>';		
+					});		
+				}		
+				jQuery('#search_results').html(content);
+		    });
+	}
+
 
 function createMap(triplocations, percentageX, percentageY) {
 	//If a percentage isn't set the mapcanvas will be resized to 50%
@@ -37,8 +138,6 @@ function createMap(triplocations, percentageX, percentageY) {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		
-
-
 		//Instantiate map
 		map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
@@ -135,3 +234,4 @@ function findPageByHashtag() {
 		break;
 	}
 }
+

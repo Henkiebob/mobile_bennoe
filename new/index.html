@@ -111,7 +111,7 @@
 					</div>
 				</div>
 			
-				<div class="login_form register">
+<!-- 				<div class="login_form register">
 					<div class="form_container">
 						<h2 class="login_title">Registeren</h2>
 						<form>
@@ -121,7 +121,7 @@
 							<input type="submit" value="Registreren" data-role="none" class="reg_btn green_button">
 						</form>
 					</div>
-				</div>
+				</div> -->
 
 			</div><!-- /content -->
 		</div>
@@ -178,39 +178,44 @@
 			</div>	<!-- nav_bar !-->
 
 			<div data-role="content">	
-
+				<div id="search_results"></div>
 				<section class="filter">
-					<form>
+					<form data-ajax="true" id="search_form">
+
+						<input type="text" data-type="search" name="search" id="search" value="" class="ui-input-text ui-body-c">
+
 						<label for="states" class="select">Provincie:</label>
 						<select name="states" id="states">
-							<option name="state" value="">Selecteer een provincie</option>
-							<option name="state" value="Brabant">Brabant</option>
-							<option name="state" value="Drenthe">Drenthe</option>
-							<option name="state" value="Flevoland">Flevoland</option>
-							<option name="state" value="Friesland">Friesland</option>
-							<option name="state" value="Gelderland">Gelderland</option>
-							<option name="state" value="Groningen">Groningen</option>
-							<option name="state" value="Limburg">Limburg</option>
-							<option name="state" value="Noord-Holland">Noord-Holland</option>
-							<option name="state" value="Overijssel">Overijssel</option>
-							<option name="state" value="Utrecht">Utrecht</option>
-							<option name="state" value="Zeeland">Zeeland</option>
-							<option name="state" value="Zuid-Holland">Zuid-Holland</option>
+							<option> Maak uw keuze </option>
+							<option>Groningen</option>
+							<option>Friesland</option>
+							<option>Drenthe</option>
+							<option>Overijssel</option>
+							<option>Flevoland</option>
+							<option>Gelderland</option>
+							<option>Utrecht</option>
+							<option>Noord-Holland</option>
+							<option>Zuid-Holland</option>
+							<option>Zeeland</option>
+							<option>Noord-Brabant</option>
+							<option>Limburg</option>
 						</select>
 						<br/>
 						<!--<input type="search" name="search-mini" placeholder="Zoek op naam" id="search-mini" value="" data-mini="true" />!-->
-					
-						<label for="slider-fill">Wandel afstand in KM</label>
-						<input type="range" name="slider-fill" id="slider-fill" value="10" min="0" max="150" data-highlight="true" />
-						<br/>
+<!-- 					
+						<label for="range">Wandel afstand in KM</label>
+						<input type="range" name="range" id="range" value="10" min="0" max="150" data-highlight="true" />
+						<br/> -->
+
 						<label for="fieldset">Categorieen:</label>
 						<fieldset data-role="controlgroup">
-							<label><input type="checkbox" name="checkbox-0" /> Urban </label>
-							<label><input type="checkbox" name="checkbox-0" /> Bos </label>
-							<label><input type="checkbox" name="checkbox-0" /> Strand </label>
-							<label><input type="checkbox" name="checkbox-0" /> Beginner </label>
+							<label><input type="checkbox" name="categories" value="1" /> Urban </label>
+							<label><input type="checkbox" name="categories" value="2" /> Bos </label>
+							<label><input type="checkbox" name="categories" value="3" /> Strand </label>
+							<label><input type="checkbox" name="categories" value="4"/> Beginner </label>
 						</fieldset>
-						<input type="submit" name="submitsearch" value="Zoeken">
+
+						<input type="button" id="submitSearch" name="submitSearch" value="Zoeken">
 
 					</form>
 				</section>
