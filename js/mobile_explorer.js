@@ -1,4 +1,4 @@
-var rootDomain = 'http://localhost:3000/';
+var rootDomain = 'http://localhost:3000';
 jQuery(function() {
 	//Call initial functions
 	//Hide address bar hides the address bar on mobile devices(If the content is higher than the deviceHeight)
@@ -7,10 +7,18 @@ jQuery(function() {
 	//Set the blocks to the correct widths
 	setBlockWidths();
 
+	//Listen for # behind the page. If present, call the function accordingly
+	findPageByHashtag();
 
+});
+
+function getAllItemsInProvince(province) {
+	if (province == "" || province == undefined) { 
+		province = 'Friesland';
+	}
 	var data = {};
-	var categoryArray = [4, 5];
-	var statesArray = ['Friesland'];
+	var categoryArray = [];
+	var statesArray = [province];
 	var rangeLow  = [];
 	var rangeHigh = [];
 	
@@ -20,105 +28,65 @@ jQuery(function() {
 			'rangeHigh': rangeHigh			
 	};
 
-	$.getJSON(rootDomain + 'explore.js?callback=?&variable=toSearch', { 
+	$.getJSON(rootDomain + '/explore.js?callback=?&variable=toSearch', { 
 		toSearch: {
 					province: statesArray
 				} 
 		}, function(data) {
 			//Huzzah!
 			if (data) {
+				//Empty the div in case its still filled
+				jQuery('#near_routes_list').html('');
+				
 				//If data is returned, loop through it and create a listitem with the title of a trip.
 				//An onclick will be fired if javascript is enabled, otherwise the user will be redirected to the page.
 				for (var i in data) {
 					if (data[i].title) {
-						var listItem = '<li>\
+						
+						var thumbnail = '/assets/mobile_placeholder.jpg';
+						if (data[i].tripphotos.length > 0 ) {
+							thumbnail = data[i].tripphotos[0].filename.thumb.url;
+						}
+
+						var categoryString = '';
+
+						if (data[i].categories.length > 0) {
+							for (var j in data[i].categories) {
+								categoryString += data[i].categories[j].name + ', ';
+							}
+						}
+						categoryString = categoryString.substr(0, categoryString.length-2);
+						var item = '<a class="route" href="route.html#' + data[i].id + '">\
+										<span class="thumb">\
+											<img src="' + rootDomain + thumbnail + '">\
+										</span>\
+										<span class="route_title">\
+											' + data[i].title + '\
+										</span>\
+										<span class="route_extra">\
+											s<br/>\
+											' + categoryString + '\
+										</span>\
+									</a>';
+//console.log(item);
+						
+						/*var listItem = '<li>\
 							<a href="' + rootDomain + 'trips/' + data[i].id + '" onClick="getSingleItem(' + data[i].id + '); return false;">\
 								' + data[i].title + '\
 							</a>\
 						</li>';
-						jQuery("#list").append(listItem);
+						jQuery("#list").append(listItem);*/
+						console.log(data[i].title);
+						jQuery('#near_routes_list').append(item);
 					}
 				}
 			}
 	    });
-	
+}
 
-	/*jQuery.ajax ({
-			url: rootDomain + 'explore.js?callback=?&variable=penis',
-			type: 'JSONP',
-			//data: {'toSearch' : data },
-			//crossDomain: true,
-			success: function (response) {
-		
-			if(response.length > 0 ) {
-				var content = '';
-				var i = 0;
-					
-				//alert(response.length);
-					
-				for(i = 0; i < response.length; i++){
-					content += '<div class="trip">Titel:' +response[i]['title']+ '   ';
-					content += 'category_id:'+response[i]['id']+ '<br/>';
-					content += 'Provincie:'  +response[i]['province']+ '</div>';					
-				}	
-			}
-			else {
-				var content = 'No results found';
-			}
-			// zet in je htmml
-			jQuery('#results ul').html(content);
-		}
-	}); 
-
-
-	/*
-	jQuery.ajax({  
-	    type: "GET",  
-	    url: rootDomain,  
-	    data: "toSearch{'province':'1','category_id':'2'}",
-	    contentType: "application/json; charset=utf-8",
-	    dataType: "json",
-		crossDomain: true
-	});
-	*/
-	/*
-	// test function
-	jQuery.getJSON(rootDomain + 'trips.js?variable=tripsJSON&callback=?',
-	  {
-	    categories: 1,2,
-	    searchQuery: "pieter",
-		states: 1,2,3,
-	    format: "json"
-	  },
-	  function(data) {
-
-	  });
-	  */
-	  /*
-	//Call all the trips
-	jQuery.getJSON(rootDomain + 'explore.js?variable=tripsJSON&callback=?', function(data) {
-		if (data) {
-			//If data is returned, loop through it and create a listitem with the title of a trip.
-			//An onclick will be fired if javascript is enabled, otherwise the user will be redirected to the page.
-			for (var i in data) {
-				if (data[i].title) {
-					var listItem = '<li>\
-						<a href="' + rootDomain + 'trips/' + data[i].id + '" onClick="getSingleItem(' + data[i].id + '); return false;">\
-							' + data[i].title + '\
-						</a>\
-					</li>';
-					jQuery("#list").append(listItem);
-				}
-			}
-		}
-	});
-
-*/
-
-});
 function getSingleItem(id) {
 	clearPath();
-	jQuery.getJSON(rootDomain + 'trips/'+ id + '.js?variable=tripsJSON&callback=?', function(data) {
+	jQuery.getJSON(rootDomain + '/trips/'+ id + '.js?variable=tripsJSON&callback=?', function(data) {
 		if (data) {
 			
 			//Slidestep function slides to the given blocknumber(Counts from left to right)
