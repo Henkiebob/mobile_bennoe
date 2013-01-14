@@ -1,4 +1,4 @@
-var rootDomain = 'http://localhost:3000/';
+var rootDomain = 'http://www.bennoe.nl';
 
 
 //Create a global data var to keep the data from the trip. This way there's only one call needed at first
@@ -92,7 +92,7 @@ function findHashtag() {
 
 function getRoute(id) {
 	clearPath();
-	jQuery.getJSON(rootDomain + 'trips/'+ id + '.js?variable=routeJSON&callback=?', function(data) {
+	jQuery.getJSON(rootDomain + '/trips/'+ id + '.js?variable=routeJSON&callback=?', function(data) {
 		if (data) {
 			globalData = data;
 			//Define the blocks that need to be filled

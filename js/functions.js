@@ -6,6 +6,8 @@ var rangeLow  = [];
 var rangeHigh = [];
 var searchQuery = "";
 
+var rootDomain = 'http://www.bennoe.nl';
+
 jQuery(document).ready(function() {
 
 			$("#submitSearch").click(function() {
@@ -71,27 +73,29 @@ function collectAll() {
 					content = '<h1>Helaas, niks gevonden</h1>';	
 				} else{
 					$.each(data, function (index, trip) {
+
 					    // Use item in here
-						content += '<a class="tripPreview" href="'+rootDomain+'/trips/'+trip.id+'">';
-						content += '<span class="tripTitle">'+trip.title+ '</span>';
-						
-						if(trip.description != null ){
-							content += '<div class="tripOverlay">'+trip.description+ '</div>';
-					    }
-						
+						content += '<a class="route" rel="external" href="/bennoe/route.html#'+trip.id+'">';
+					
 						var pic_count = 0;
 					    $.each(trip.tripphotos,function(index2,tripphoto){
 					   
 					   		if(pic_count == 0){
 						   		if(tripphoto.filename.thumb.url.length != null){
-							   	 content += '<img src="'+rootDomain+tripphoto.filename.thumb.url+'">';
+							   	 content += '<span class="thumb"><img src="'+rootDomain+tripphoto.filename.thumb.url+'"></span>';
 						  	 	}
 					   		}
 
 					   		pic_count ++
 
 					    });
-							
+
+					    content += '<span class="route_title">'+trip.title+ '</span>';
+
+						if(trip.description != null ){
+							content += '<span class="route_extra">'+trip.description+ '</span>';
+					    }
+													
 						content += '</a>';		
 					});		
 				}		

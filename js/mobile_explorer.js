@@ -1,4 +1,4 @@
-var rootDomain = 'http://localhost:3000';
+var rootDomain = 'http://www.bennoe.nl';
 jQuery(function() {
 	//Call initial functions
 	//Hide address bar hides the address bar on mobile devices(If the content is higher than the deviceHeight)
