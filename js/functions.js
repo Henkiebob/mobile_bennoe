@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
 
 function searchCheck(){
 	searchQuery = "";
-	searchQuery = $('#search').val();	
+	searchQuery = $('#search-mini').val();	
 }
 
 function categoryCheck(){
