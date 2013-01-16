@@ -37,7 +37,13 @@ function categoryCheck(){
 
 function stateCheck(){
 	statesArray = [];	
+
+
 	var state = $('#states').val();
+
+	if(state == "Maak uw keuze"){
+		state = "";
+	}
 
 	if(state != ""){
 		statesArray.push(state);
@@ -82,7 +88,8 @@ function collectAll() {
 					   
 					   		if(pic_count == 0){
 						   		if(tripphoto.filename.thumb.url.length != null){
-							   	 content += '<span class="thumb"><img src="'+rootDomain+tripphoto.filename.thumb.url+'"></span>';
+							   	 //content += '<span class="thumb"><img src="'+rootDomain+tripphoto.filename.thumb.url+'"></span>';
+							   	 content = '<span class="thumb"><img src=""/>';
 						  	 	}
 					   		}
 
